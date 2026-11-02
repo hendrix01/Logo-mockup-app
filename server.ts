@@ -12,6 +12,14 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 
+// Disable Express fingerprinting and set defensive headers
+app.disable('x-powered-by');
+app.use((_req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  next();
+});
+
 // Generous limit for high-resolution base64 images
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -132,10 +140,8 @@ app.post('/api/mockup/generate', async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error('Error generating image:', error);
     const status = error?.status || 500;
-    const message = error?.message || 'Failed to generate image';
-    return res.status(status).json({
-      error: message,
-      details: error?.error?.message || error?.toString(),
+    return res.status(status).json({ 
+      error: 'Failed to generate mockup image. Please check prompt parameters and try again.',
     });
   }
 });
@@ -218,10 +224,8 @@ app.post('/api/mockup/edit', async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error('Error editing image:', error);
     const status = error?.status || 500;
-    const message = error?.message || 'Failed to edit image';
-    return res.status(status).json({
-      error: message,
-      details: error?.error?.message || error?.toString(),
+    return res.status(status).json({ 
+      error: 'Failed to edit mockup image. Please verify input data and try again.',
     });
   }
 });

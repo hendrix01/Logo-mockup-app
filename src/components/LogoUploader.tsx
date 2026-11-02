@@ -28,8 +28,15 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
   };
 
   const processFile = (file: File) => {
-    if (!file.type.startsWith('image/')) {
-      alert('Please upload an image file (PNG, SVG, JPG, WebP)');
+    const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/svg+xml'];
+    const MAX_SIZE_BYTES = 15 * 1024 * 1024; // 15MB limit
+
+    if (!ALLOWED_TYPES.includes(file.type.toLowerCase())) {
+      alert('Invalid file format. Please upload a PNG, JPEG, WebP, or SVG image.');
+      return;
+    }
+    if (file.size > MAX_SIZE_BYTES) {
+      alert('File size exceeds the 15MB upload limit.');
       return;
     }
     const reader = new FileReader();
