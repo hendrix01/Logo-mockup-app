@@ -220,6 +220,7 @@ export const InteractiveCanvas: React.FC<InteractiveCanvasProps> = ({
         <button
           onClick={() => setShowGuides(!showGuides)}
           title={showGuides ? 'Hide Print Boundary' : 'Show Print Boundary'}
+          aria-label={showGuides ? 'Hide print boundary guides' : 'Show print boundary guides'}
           className={`p-2 rounded-lg transition-colors ${
             showGuides ? 'bg-cyan-500/20 text-cyan-300' : 'hover:bg-slate-800 text-slate-400'
           }`}
@@ -232,6 +233,7 @@ export const InteractiveCanvas: React.FC<InteractiveCanvasProps> = ({
         <button
           onClick={() => setStageBg(stageBg === 'dark' ? 'grid' : stageBg === 'grid' ? 'light' : 'dark')}
           title="Toggle Canvas Background"
+          aria-label={`Toggle canvas stage background, current mode ${stageBg}`}
           className="px-2 py-1 text-xs font-mono font-medium rounded-lg hover:bg-slate-800 text-slate-300 transition-colors uppercase"
         >
           {stageBg}
@@ -242,6 +244,7 @@ export const InteractiveCanvas: React.FC<InteractiveCanvasProps> = ({
         <button
           onClick={() => setZoom((z) => Math.max(0.6, Number((z - 0.15).toFixed(2))))}
           title="Zoom Out"
+          aria-label="Zoom out canvas view"
           className="p-2 rounded-lg hover:bg-slate-800 text-slate-300 transition-colors"
         >
           <ZoomOut className="w-4 h-4" />
@@ -252,6 +255,7 @@ export const InteractiveCanvas: React.FC<InteractiveCanvasProps> = ({
         <button
           onClick={() => setZoom((z) => Math.min(2.0, Number((z + 0.15).toFixed(2))))}
           title="Zoom In"
+          aria-label="Zoom in canvas view"
           className="p-2 rounded-lg hover:bg-slate-800 text-slate-300 transition-colors"
         >
           <ZoomIn className="w-4 h-4" />
@@ -259,6 +263,7 @@ export const InteractiveCanvas: React.FC<InteractiveCanvasProps> = ({
         <button
           onClick={() => setZoom(1)}
           title="Reset View"
+          aria-label="Reset canvas zoom to 100%"
           className="p-2 rounded-lg hover:bg-slate-800 text-slate-300 transition-colors"
         >
           <Maximize2 className="w-4 h-4" />
