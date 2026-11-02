@@ -1,0 +1,6 @@
+{
+  "name": "MockupCraft Studio",
+  "description": "Upload logos and realistically place them on interactive product mockups like mugs, apparel, and accessories, or generate studio scenes with Gemini AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
